@@ -11,5 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value = "classifyRepository")
 public interface ClassifyRepository extends CrudRepository<Classify, Long>{
-    
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Classify SET name=?2, transaction=?3 WHERE id=?1")
+    public void update(Long id, String name, Boolean transaction);
 }

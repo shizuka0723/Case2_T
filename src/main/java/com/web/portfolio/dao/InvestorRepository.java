@@ -15,4 +15,9 @@ public interface InvestorRepository extends CrudRepository<Investor, Long>{
     @Query(value = "Select i From Investor i Where i.pass=true And i.username=?1")
     public Investor getInvestor(String username);
     
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Investor SET username=?2, password=?3, email=?4, balance=?5 WHERE id=?1")
+    public void update(Long id, String username, String password, String email, Integer balance);
+
 }

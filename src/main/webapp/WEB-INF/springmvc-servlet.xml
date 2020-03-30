@@ -49,9 +49,7 @@
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    
+    <!--  Spring Data JPA 的設定 -->
     <jpa:repositories base-package="com.web.portfolio.dao"></jpa:repositories>
-    <!--  Spring Data JPA 的設定 
-    <jpa:repositories base-package="com.web.portfolio.dao"/>
-    -->
+    
 </beans>
