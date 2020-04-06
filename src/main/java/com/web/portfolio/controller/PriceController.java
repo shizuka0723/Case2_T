@@ -22,16 +22,41 @@ public class PriceController {
     @Autowired
     private PortfolioService service;
     
+    //股價行情資料更新
     @GetMapping(value = {"/refresh"})
     @Transactional
     public Iterable<TStock> refresh() {
-        // Block of code
-        return null;
+        // 取得資料庫裡的股票
+        Iterable<TStock> list = service.gettStockRepository().findAll();
+        for(TStock ts : list){
+            // 取得報價資訊
+            try {
+                Stock stock = YahooFinance.get(ts.getSymbol());
+                ts.setChangeInPercent(stock.getQuote().getChangeInPercent());
+                ts.setChangePrice(stock.getQuote().getChange());
+                ts.setPreClosed(stock.getQuote().getPreviousClose());
+                ts.setPrice(stock.getQuote().getPrice());
+                ts.setVolumn(stock.getQuote().getVolume());
+                service.gettStockRepository().save(ts);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
     }
     
     @GetMapping(value = {"/histquotes/{symbol:.+}"}) // 歷史股價
     public List<HistoricalQuote> queryHistQuotes(@PathVariable("symbol") String symbol) {
-        // Block of code
-        return null;
+        List<HistoricalQuote> histQuotes = null;
+        try {
+            Calendar from = Calendar.getInstance();
+            Calendar to = Calendar.getInstance();
+            from.add(Calendar.MONTH, -1);
+            Stock google = YahooFinance.get(symbol);
+            histQuotes = google.getHistory(from, to, Interval.DAILY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return histQuotes;
     }
 }
