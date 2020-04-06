@@ -51,7 +51,7 @@ public class PriceController {
         try {
             Calendar from = Calendar.getInstance();
             Calendar to = Calendar.getInstance();
-            from.add(Calendar.MONTH, -1);
+            from.add(Calendar.MONTH, -3);
             Stock google = YahooFinance.get(symbol);
             histQuotes = google.getHistory(from, to, Interval.DAILY);
         } catch (Exception e) {
