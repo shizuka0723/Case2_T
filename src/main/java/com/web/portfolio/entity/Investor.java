@@ -39,11 +39,11 @@ public class Investor implements Serializable {
     private Boolean pass;
     
 
-    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("investor")
     private Set<Portfolio> portfolios;
     
-    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("investor")
     private Set<Watch> watchs;
     

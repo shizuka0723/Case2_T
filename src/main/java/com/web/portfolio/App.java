@@ -51,15 +51,15 @@ public class App {
         service.gettStockRepository().save(ts8);
         service.gettStockRepository().save(ts9);
         
-        //Portfolio portfolio1 = new Portfolio(60.5, 2000, investor1, ts1);
-        //Portfolio portfolio2 = new Portfolio(35.5, 5000, investor1, ts2);
-        //portfolioRepository.save(portfolio1);
-        //portfolioRepository.save(portfolio2);
-        
         Watch watch = new Watch();
         watch.setInvestor(investor1);
         watch.setName("我的觀察股");
         service.getWatchRepository().save(watch);
+        
+        Watch watch2 = new Watch();
+        watch2.setInvestor(investor2);
+        watch2.setName("我的觀察股2");
+        service.getWatchRepository().save(watch2);
     }
     
     
